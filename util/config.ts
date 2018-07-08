@@ -195,7 +195,6 @@ export function getSchematicDefaults(
 ): {} {
   let result = {};
   const fullName = `${collection}:${schematic}`;
-  console.log('--fullName--', fullName)
   let workspace = getWorkspace('global');
   if (workspace && workspace.getSchematics()) {
     const schematicObject = workspace.getSchematics()[fullName];
@@ -233,10 +232,8 @@ export function getSchematicDefaults(
       if (typeof collectionObject == 'object' && !Array.isArray(collectionObject)) {
         result = { ...result, ...(collectionObject[schematic] as {}) };
       }
-      console.log('--collectionObject--', collectionObject)
     }
   }
-  console.log('--workspace--', workspace)
   return result;
 }
 

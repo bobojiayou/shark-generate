@@ -77,22 +77,7 @@ export async function runCommand(commandMap: CommandMap,
     if (!args || args.length === 0) {
         args = ['help'];
     }
-    /*   console.log('--run commands--')
-      console.log('--commandMap--', commandMap)
-      console.log('--args--', args)
-      console.log('--logger--', logger)
-      console.log('--context--', context) */
-
-    // 获取未处理的options ==> 把args处理成 对象
-    /*eg {
-      _: ['g', 'pipe', 'bobo'],
-      help: false,
-      h: false,
-      'skip-import': true,
-      skipImport: true
-    } */
     const rawOptions = yargsParser(args, { alias: { help: ['h'] }, boolean: ['help'] });
-    console.log('--rawOptions--', rawOptions)
     // 获取 命令名称 或 命令名称简写 eg : 'g'
     let commandName = rawOptions._[0];
 
@@ -102,11 +87,9 @@ export async function runCommand(commandMap: CommandMap,
     const executionScope = insideProject()
         ? CommandScope.inProject
         : CommandScope.outsideProject;
-    console.log('--executionScope--', executionScope);
     // 找到执行命令实现类 Cmd eg:[Function: GenerateCommand]
     let Cmd: CommandConstructor | null;
     Cmd = findCommand(commandMap, commandName);
-    /*  console.log('--cmd--', Cmd); */
     // 如果命令实现类与命令名称均不存在，但 options中包含v 或 version.则将Cmd置为 获取版本号的实现类
     if (!Cmd && !commandName && (rawOptions.v || rawOptions.version)) {
         commandName = 'version';
@@ -212,7 +195,6 @@ export async function runCommand(commandMap: CommandMap,
              force: false,
              skipImport: true
            } */
-        console.log('-执行命令-', options)
         return await command.run(options);
     }
 }

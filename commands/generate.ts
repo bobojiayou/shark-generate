@@ -33,12 +33,8 @@ export default class GenerateCommand extends SchematicCommand {
 
     public run(options: any) {
         const [collectionName, schematicName] = this.parseSchematicInfo(options);
-        console.log('--collectionName--', collectionName, )
-        console.log('--schematicName--', schematicName, )
         // remove the schematic name from the options
         options._ = options._.slice(1);
-        console.log('--options--')
-        console.log(options)
         return this.runSchematic({
             collectionName,
             schematicName,

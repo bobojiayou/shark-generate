@@ -32,7 +32,6 @@ function _fromPackageJson(cwd?: string) {
 
 let cli;
 try {
-    console.log('--packageJson--', packageJson)
     const projectLocalCli = resolve(
         'shark-generate',
         {
@@ -43,17 +42,14 @@ try {
     );
     // This was run from a global, check local version.
     const globalVersion = new SemVer(packageJson['version']);
-    console.log('--globalVersion--', globalVersion)
     let localVersion;
     let shouldWarn = false;
 
     try {
         localVersion = _fromPackageJson();
-        console.log('--localVersion--', localVersion)
         shouldWarn = localVersion != null && globalVersion.compare(localVersion) > 0;
     } catch (e) {
         // eslint-disable-next-line no-console
-        console.error('xxxx1', e);
         shouldWarn = true;
     }
 
@@ -77,14 +73,12 @@ try {
 
     // No error implies a projectLocalCli, which will load whatever
     // version of ng-cli you have installed in a local package.json
-    console.log('-projectLocalCli-', projectLocalCli)
     cli = require(projectLocalCli);
 } catch {
     // If there is an error, resolve could not find the ng-cli
     // library from a package.json. Instead, include it from a relative
     // path to this script file (which is likely a globally installed
     // npm package). Most common cause for hitting this is `ng new`
-    console.log(`cli = require('./ index');`)
     cli = require('./index');
 }
 
@@ -92,7 +86,6 @@ if ('default' in cli) {
     cli = cli['default'];
 }
 
-console.log('--end---')
 cli({ cliArgs: process.argv.slice(2) })
     .then((exitCode: number) => {
         process.exit(exitCode);
