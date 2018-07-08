@@ -13,9 +13,7 @@ function loadCommands() {
 }
 
 const cli = async function (options: { testing?: boolean, cliArgs: string[] }) {
-    console.log('--cliArgs--', options.cliArgs)
     const commands = loadCommands();
-
     const logger = new logging.IndentLogger('cling');
     let loggingSubscription;
     if (!options.testing) {

@@ -21,7 +21,6 @@
     "@types/node": "^8.9.1",
     "@types/request": "^2.47.0",
     "@types/semver": "^5.3.30",
-    "@types/source-map": "^0.5.6",
     "ajv": "~6.4.0",
     "chalk": "~2.2.2",
     "chokidar": "^2.0.3",

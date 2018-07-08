@@ -104,16 +104,9 @@ export abstract class SchematicCommand extends Command {
          *  console.log('--schematicOptions--', schematicOptions)
         */
         let schematicOptions = this.removeCoreOptions(options.schematicOptions);
-        console.log('--schematicOptions--', schematicOptions)
         let nothingDone = true;
         let loggingQueue: string[] = [];
         let error = false;
-        /**  fsHost = 
-         *  {
-           _delegate: NodeJsSyncHost {},
-          _root: '/Users/bobo/Work/test/my1' }
-          console.log('--fsHost--', fsHost)
-         */
         const fsHost = new virtualFs.ScopedHost(new NodeJsSyncHost(), normalize(this.project.root));
         /**
          *  实例化一个工作流
@@ -131,22 +124,18 @@ export abstract class SchematicCommand extends Command {
         const workingDir = process.cwd().replace(this.project.root, '').replace(/\\/g, '/');
         // { path: '/src' } this.setPathOptions({ _: [ 'bobo1' ], skipImport: true }, '/src')
         const pathOptions = this.setPathOptions(schematicOptions, workingDir);
-        console.log('--pathOptions--', pathOptions);
 
         // schematicOptions = { _: [ 'bobo4'], skipImport: true, path: '/src' }
         schematicOptions = { ...schematicOptions, ...pathOptions };
         const defaultOptions = this.readDefaults(collectionName, schematicName, schematicOptions);
-        console.log('--defaultOptions--', defaultOptions)
         schematicOptions = { ...schematicOptions, ...defaultOptions };
 
-        console.log('--schematicOptions--', schematicOptions)
         // Pass the rest of the arguments as the smart default "argv". Then delete it.
         // Removing the first item which is the schematic name.
         // eg. rawArgs = [ 'bobo4']
         const rawArgs = schematicOptions._;
         workflow.registry.addSmartDefaultProvider('argv', (schema: JsonObject) => {
             // schema = { '$source': 'argv', index: 0 }
-            console.log('--schema--', schema)
             if ('index' in schema) {
                 return rawArgs[Number(schema['index'])]; // 'bobo4' --
             } else {
@@ -157,7 +146,6 @@ export abstract class SchematicCommand extends Command {
 
         workflow.registry.addSmartDefaultProvider('projectName', (_schema: JsonObject) => {
             //  _schema = { '$source': 'projectName' }
-            console.log('--_schema--', _schema)
             /*   this._workspace =  { '$schema': './node_modules/@angular/cli/lib/config/schema.json',
                       version: 1,
                       newProjectRoot: 'projects',
@@ -170,22 +158,15 @@ export abstract class SchematicCommand extends Command {
             */
             /*  console.log('--this._workspace.projects--', (this._workspace as any).projects) */
             if (this._workspace) {
-                console.log('--this._workspace.getProjectByPath(normalize(process.cwd()))--', this._workspace.getProjectByPath(normalize(process.cwd())))
-                console.log('--this._workspace.getDefaultProjectName()--', this._workspace.getDefaultProjectName())
-
                 return this._workspace.getProjectByPath(normalize(process.cwd()))
                     || this._workspace.getDefaultProjectName();
             }
             return undefined;
         });
-        console.log('-----------++--------------workflow-----++++++++++++++++++++--')
         workflow.reporter.subscribe((event: DryRunEvent) => {
             nothingDone = false;
-            console.log('---------in reporter----')
             // Strip leading slash to prevent confusion.
             const eventPath = event.path.startsWith('/') ? event.path.substr(1) : event.path; // src/bobo10.pipe.ts
-            console.log('--eventPath--', eventPath)
-            console.log('--event--', event) // { kind: 'create',path: '/src/bobo10.pipe.ts',content: Buffer……}
             switch (event.kind) {
                 case 'error':
                     error = true;
@@ -212,7 +193,6 @@ export abstract class SchematicCommand extends Command {
         });
 
         workflow.lifeCycle.subscribe(event => {
-            console.log('---------in lifeCycle----')
             if (event.kind == 'end' || event.kind == 'post-tasks-start') {
                 if (!error) {
                     // Output the logging queue, no error happened.
@@ -233,7 +213,6 @@ export abstract class SchematicCommand extends Command {
                 logger: this.logger as any,
                 allowPrivate: this.allowPrivateSchematics,
             }
-            console.log('--exec--', obj)
             workflow.execute({
                 collection: collectionName,
                 schematic: schematicName,
@@ -244,8 +223,6 @@ export abstract class SchematicCommand extends Command {
             })
                 .subscribe({
                     error: (err: Error) => {
-                        console.log('++++exec+ error++++', err)
-
                         // In case the workflow was not successful, show an appropriate error message.
                         if (err instanceof UnsuccessfulWorkflowExecution) {
                             // "See above" because we already printed the error.
@@ -259,8 +236,6 @@ export abstract class SchematicCommand extends Command {
                         resolve(1);
                     },
                     complete: () => {
-                        console.log('++++exec+ complete++++')
-
                         const showNothingDone = !(options.showNothingDone === false);
                         if (nothingDone && showNothingDone) {
                             this.logger.info('Nothing to be done.');
@@ -311,10 +286,7 @@ export abstract class SchematicCommand extends Command {
         const collectionName = options.collectionName || getDefaultSchematicCollection();
 
         const collection = getCollection(collectionName);
-        console.log('--+++-collection------', collection)
         const schematic = getSchematic(collection, options.schematicName, this.allowPrivateSchematics);
-        console.log('--+++-schematic------', schematic)
-
         this._deAliasedName = schematic.description.name;
 
         if (!schematic.description.schemaJson) {
