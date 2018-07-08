@@ -1,6 +1,6 @@
 {
   "name": "shark-generate",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "a angularX generate based schematics",
   "bin": {
     "sgx": "./dist/bin/sgx"
