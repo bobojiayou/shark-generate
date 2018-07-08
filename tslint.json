@@ -47,10 +47,9 @@
                 "variable-declaration": "onespace"
             }
         ],
-        "no-internal-module": true,
-        "no-trailing-whitespace": true,
-        "no-null-keyword": true,
-        "prefer-const": true,
-        "jsdoc-format": true
+        "no-internal-module": false,
+        "no-trailing-whitespace": false,
+        "prefer-const": false,
+        "jsdoc-format": false
     }
 }

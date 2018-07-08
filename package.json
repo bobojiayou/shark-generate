@@ -1,0 +1,45 @@
+{
+  "name": "shark-generate",
+  "version": "0.0.1",
+  "description": "a angularX generate based schematics",
+  "bin": {
+    "sgx": "./dist/bin/sgx"
+  },
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w",
+    "tslint": "tslint -c tslint.json -p tsconfig.json"
+  },
+  "author": "yangbo",
+  "license": "ISC",
+  "dependencies": {
+    "@angular-devkit/core": "0.7.0-beta.2",
+    "@angular-devkit/schematics": "0.7.0-beta.2",
+    "@ngtools/json-schema": "1.1.0",
+    "@schematics/schematics": "0.7.0-beta.2",
+    "@types/glob": "^5.0.29",
+    "@types/node": "^8.9.1",
+    "@types/request": "^2.47.0",
+    "@types/semver": "^5.3.30",
+    "@types/source-map": "^0.5.6",
+    "ajv": "~6.4.0",
+    "chalk": "~2.2.2",
+    "chokidar": "^2.0.3",
+    "figlet": "^1.2.0",
+    "glob": "^7.0.3",
+    "semver": "5.5.0",
+    "shark-schematics": "^0.2.1",
+    "source-map": "^0.5.6",
+    "symbol-observable": "^1.2.0",
+    "ts-node": "^5.0.0",
+    "tslint": "^5.9.1",
+    "typescript": "^2.7.2",
+    "yargs-parser": "^10.1.0",
+    "zone.js": "^0.8.19"
+  },
+  "devDependencies": {
+    "@types/jasmine": "^2.8.8",
+    "jasmine": "^3.1.0",
+    "node-typescript-compiler": "^1.1.1"
+  }
+}
