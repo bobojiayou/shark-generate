@@ -1,10 +1,6 @@
 #!/usr/bin/env node
 
 'use strict'
-
-// 设置进程title
-process.title = 'sgx'
-
 // 判断Node环境的版本号是否ok (>=8.9), 不行的话，则提示用户更新Node版本
 var version = process.version.substr(1).split('.')
 if (Number(version[0]) < 8 || (Number(version[0]) === 8 && Number(version[1]) < 9)) {
