@@ -1,7 +1,8 @@
-bin
-cli
-commands
-docs
-lib
-tmp
-util
+!dist
+/cli
+/commands
+/docs
+/lib
+/tmp
+/util
+/bin
