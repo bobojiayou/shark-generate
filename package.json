@@ -1,6 +1,6 @@
 {
   "name": "shark-generate",
-  "version": "1.0.9-beta.1",
+  "version": "1.0.9-beta.2",
   "description": "a angularX generate based schematics",
   "bin": {
     "sgx": "./dist/bin/sgx"
@@ -27,7 +27,7 @@
     "figlet": "^1.2.0",
     "glob": "^7.0.3",
     "semver": "5.5.0",
-    "shark-schematics": "^@1.0.4-beta.1",
+    "shark-schematics": "^1.0.4-beta.2",
     "source-map": "^0.5.6",
     "symbol-observable": "^1.2.0",
     "ts-node": "^5.0.0",
