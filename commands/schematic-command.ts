@@ -163,6 +163,7 @@ export abstract class SchematicCommand extends Command {
             }
             return undefined;
         });
+
         workflow.reporter.subscribe((event: DryRunEvent) => {
             nothingDone = false;
             // Strip leading slash to prevent confusion.
@@ -174,11 +175,15 @@ export abstract class SchematicCommand extends Command {
                     this.logger.warn(`ERROR! ${eventPath} ${desc}.`);
                     break;
                 case 'update':
+                    /*    console.log('--eventPath--', eventPath)
+                       console.log('--event--', event)  */// { kind: 'create',path: '/src/bobo10.pipe.ts',content: Buffer……}
                     loggingQueue.push(tags.oneLine`
             ${terminal.white('UPDATE')} ${eventPath} (${event.content.length} bytes)
           `);
                     break;
                 case 'create':
+                    /*     console.log('--eventPath--', eventPath)
+                        console.log('--event--', event)  */// { kind: 'create',path: '/src/bobo10.pipe.ts',content: Buffer……}
                     loggingQueue.push(tags.oneLine`
             ${terminal.green('CREATE')} ${eventPath} (${event.content.length} bytes)
           `);
@@ -236,7 +241,8 @@ export abstract class SchematicCommand extends Command {
                         resolve(1);
                     },
                     complete: () => {
-                        const showNothingDone = !(options.showNothingDone === false);
+/*                         console.log('-----------++--------------workflow--complete---++++++++++++++++++++--')
+ */                        const showNothingDone = !(options.showNothingDone === false);
                         if (nothingDone && showNothingDone) {
                             this.logger.info('Nothing to be done.');
                         }

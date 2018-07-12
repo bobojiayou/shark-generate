@@ -1,0 +1,15 @@
+{
+    "version": 1,
+    "newProjectRoot": "projects",
+    "projects": {
+      "my1": {
+        "root": "",
+        "sourceRoot": "src",
+        "projectType": "application",
+        "prefix": "app",
+        "schematics": {},
+        "architect": {}
+        }      
+    },
+    "defaultProject": "my1"
+  }

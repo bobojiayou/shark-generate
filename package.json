@@ -27,7 +27,7 @@
     "figlet": "^1.2.0",
     "glob": "^7.0.3",
     "semver": "5.5.0",
-    "shark-schematics": "^0.2.1",
+    "shark-schematics": "^1.0.2",
     "source-map": "^0.5.6",
     "symbol-observable": "^1.2.0",
     "ts-node": "^5.0.0",
